@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sportsquiz.R
 import com.example.sportsquiz.business.models.QuizListModel
+import com.example.sportsquiz.presentation.adapter.listener.QuizListListener
 
-class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizListViewHolder>(){
+class QuizListAdapter(val quizListListener: QuizListListener) : RecyclerView.Adapter<QuizListAdapter.QuizListViewHolder>(){
 
     private val quizList = mutableListOf<QuizListModel>()
 
@@ -25,6 +26,10 @@ class QuizListAdapter : RecyclerView.Adapter<QuizListAdapter.QuizListViewHolder>
         val resultQuizList : QuizListModel = quizList[position]
 
         holder.title.text = resultQuizList.title
+
+        holder.itemView.setOnClickListener {
+            quizListListener.quizList(list = resultQuizList)
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

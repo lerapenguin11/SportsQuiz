@@ -19,10 +19,12 @@ class QuizListRepository() {
                     val title = document.getString("title")
                     val level = document.getString("level")
                     val questions = document.getLong("questions")
+                    val category = document.getString("category")
                     val resultQuizListModel = QuizListModel(
                          title = title!!,
                         level = level!!,
-                        questions = questions!!
+                        questions = questions!!,
+                        category = category!!
                     )
                     listData.add(resultQuizListModel)
                 }
