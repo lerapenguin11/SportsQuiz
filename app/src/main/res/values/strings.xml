@@ -9,4 +9,8 @@
     <string name="hokey">Hockey</string>
     <string name="fight">Fight</string>
     <string name="basketball">Basketball</string>
+    <string name="football_quiz">Football Quiz</string>
+    <string name="available_tests">Available tests</string>
+    <string name="topic">Topic</string>
+    <string name="not_passed">Not passed</string>
 </resources>
