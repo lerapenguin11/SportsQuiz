@@ -13,4 +13,10 @@
     <string name="available_tests">Available tests</string>
     <string name="topic">Topic</string>
     <string name="not_passed">Not passed</string>
+    <string name="category">Category:</string>
+    <string name="questions">Questions:</string>
+    <string name="leveL">Level:</string>
+    <string name="possible_points">Possible points</string>
+    <string name="play">Start the game</string>
+    <string name="close">Close</string>
 </resources>
