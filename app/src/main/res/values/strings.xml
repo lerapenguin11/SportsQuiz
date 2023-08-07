@@ -19,4 +19,6 @@
     <string name="possible_points">Possible points</string>
     <string name="play">Start the game</string>
     <string name="close">Close</string>
+    <string name="correct_guess">Correct guess</string>
+    <string name="wrong_guess">Wrong guess</string>
 </resources>
