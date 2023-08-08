@@ -87,6 +87,5 @@ class FootballFragment : Fragment(), QuizListListener {
 
         close.setOnClickListener { dialog.cancel() }
         play.setOnClickListener { dialog.dismiss() }
-
     }
 }

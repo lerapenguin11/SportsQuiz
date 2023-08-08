@@ -21,4 +21,5 @@
     <string name="close">Close</string>
     <string name="correct_guess">Correct guess</string>
     <string name="wrong_guess">Wrong guess</string>
+    <string name="next">Next</string>
 </resources>

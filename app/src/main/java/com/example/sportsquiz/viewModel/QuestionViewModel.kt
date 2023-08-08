@@ -20,7 +20,9 @@ class QuestionViewModel : ViewModel() {
 
         return mutableData
     }
-    var id = 0
+
+    private var id = 0
+
     fun updateId() : Int{
         viewModelScope.launch {
             id++

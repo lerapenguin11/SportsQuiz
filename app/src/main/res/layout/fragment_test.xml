@@ -22,12 +22,36 @@
 
     <ImageView
         android:id="@+id/bt_close_test"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/ic_close"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bt_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/bt_close_test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bt_close_test">
+
+
+        <TextView
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:fontFamily="@font/poppins_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tv_questions_test"

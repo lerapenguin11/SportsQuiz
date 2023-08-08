@@ -1,5 +1,6 @@
 package com.example.sportsquiz.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,7 @@ class TestFragment : Fragment(){
         return binding.root
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun loadQuestions(){
         val viewModel : QuestionViewModel = ViewModelProvider(requireActivity()).get(
             QuestionViewModel::class.java)
@@ -51,7 +53,8 @@ class TestFragment : Fragment(){
 
         val viewModel : QuestionViewModel = ViewModelProvider(requireActivity()).get(
             QuestionViewModel::class.java)
-        binding.btCloseTest.setOnClickListener {
+        //TODO изменить
+        binding.btNext.setOnClickListener {
             updateOptionsClick()
             viewModel.getResulQuestion().observe(viewLifecycleOwner, Observer {questions ->
                 for (doc in questions){
@@ -74,6 +77,7 @@ class TestFragment : Fragment(){
         binding.tvStatusWrong.visibility = View.INVISIBLE
         binding.ivStatusCorrect.visibility = View.INVISIBLE
         binding.tvStatusCorrect.visibility = View.INVISIBLE
+        binding.btNext.visibility = View.INVISIBLE
     }
 
     private fun optionsClick() {
@@ -84,6 +88,7 @@ class TestFragment : Fragment(){
                 a = false
                 binding.ivStatusWrong.visibility = View.VISIBLE
                 binding.tvStatusWrong.visibility = View.VISIBLE
+                binding.btNext.visibility = View.VISIBLE
             }
         }
         binding.constraintLayout10.setOnClickListener {
@@ -92,6 +97,7 @@ class TestFragment : Fragment(){
                 a = false
                 binding.ivStatusWrong.visibility = View.VISIBLE
                 binding.tvStatusWrong.visibility = View.VISIBLE
+                binding.btNext.visibility = View.VISIBLE
             }
         }
         binding.constraintLayout11.setOnClickListener {
@@ -100,6 +106,7 @@ class TestFragment : Fragment(){
                 a = false
                 binding.ivStatusCorrect.visibility = View.VISIBLE
                 binding.tvStatusCorrect.visibility = View.VISIBLE
+                binding.btNext.visibility = View.VISIBLE
             }
 
         }
