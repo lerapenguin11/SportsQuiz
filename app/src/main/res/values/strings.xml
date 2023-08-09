@@ -22,4 +22,10 @@
     <string name="correct_guess">Correct guess</string>
     <string name="wrong_guess">Wrong guess</string>
     <string name="next">Next</string>
+    <string name="quiz">Quiz Sports</string>
+    <string name="finish">End quiz</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="you_won_the_game_by_guessing_all_scrum_results_correctly">You won the game by guessing all scrum results correctly!</string>
+    <string name="defeat">Defeat!</string>
+    <string name="you_haven_t_answered_all_the_questions_try_taking_the_test_again">You haven\'t answered all the questions. Try taking the test again.</string>
 </resources>
