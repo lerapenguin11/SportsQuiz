@@ -15,6 +15,7 @@ import com.example.sportsquiz.databinding.FragmentFootballBinding
 import com.example.sportsquiz.presentation.adapter.QuizListAdapter
 import com.example.sportsquiz.presentation.adapter.listener.QuizListListener
 import com.example.sportsquiz.utilits.replaceFragment
+import com.example.sportsquiz.viewModel.LivesViewModel
 import com.example.sportsquiz.viewModel.QuizListViewModel
 
 class FootballFragment : Fragment(), QuizListListener {
@@ -60,6 +61,9 @@ class FootballFragment : Fragment(), QuizListListener {
     }
 
     override fun quizList(list: QuizListModel) {
+        val viewModel : LivesViewModel = ViewModelProvider(requireActivity()).get(
+            LivesViewModel::class.java)
+
         val dialog = Dialog(requireContext(), android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.full_screen_dialog_open_test)
@@ -83,9 +87,12 @@ class FootballFragment : Fragment(), QuizListListener {
         level.text = list.level
         dialog.getWindow()!!.getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.show()
-        replaceFragment(TestFragment())
 
         close.setOnClickListener { dialog.cancel() }
-        play.setOnClickListener { dialog.dismiss() }
+
+        play.setOnClickListener {
+            dialog.dismiss()
+            viewModel.useLife()
+            replaceFragment(TestFragment())}
     }
 }

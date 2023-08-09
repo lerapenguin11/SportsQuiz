@@ -5,20 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportsquiz.R
 import com.example.sportsquiz.databinding.FragmentTestBinding
+import com.example.sportsquiz.viewModel.AwardsViewModel
 import com.example.sportsquiz.viewModel.QuestionViewModel
 
 class TestFragment : Fragment(){
 
     private var _binding : FragmentTestBinding? = null
     private val binding get() = _binding!!
-    var a = true
+    var check = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +63,7 @@ class TestFragment : Fragment(){
                     binding.tvOptionTwo.text = doc.option_b
                     binding.tvOptionThree.text = doc.answer
                 }
-                a = true
+                check = true
                 optionsClick()
             })
         }
@@ -81,32 +81,36 @@ class TestFragment : Fragment(){
     }
 
     private fun optionsClick() {
+        val viewModel : AwardsViewModel = ViewModelProvider(requireActivity()).get(
+            AwardsViewModel::class.java)
 
         binding.constraintLayout9.setOnClickListener {
-            if (a){
+            if (check){
                 binding.constraintLayout9.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_wrong)
-                a = false
+                check = false
                 binding.ivStatusWrong.visibility = View.VISIBLE
                 binding.tvStatusWrong.visibility = View.VISIBLE
                 binding.btNext.visibility = View.VISIBLE
             }
         }
         binding.constraintLayout10.setOnClickListener {
-            if (a){
+            if (check){
                 binding.constraintLayout10.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_wrong)
-                a = false
+                check = false
                 binding.ivStatusWrong.visibility = View.VISIBLE
                 binding.tvStatusWrong.visibility = View.VISIBLE
                 binding.btNext.visibility = View.VISIBLE
             }
         }
         binding.constraintLayout11.setOnClickListener {
-            if (a){
+            if (check){
                 binding.constraintLayout11.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_win)
-                a = false
+                check = false
                 binding.ivStatusCorrect.visibility = View.VISIBLE
                 binding.tvStatusCorrect.visibility = View.VISIBLE
                 binding.btNext.visibility = View.VISIBLE
+
+                viewModel.collectQuestion()
             }
 
         }

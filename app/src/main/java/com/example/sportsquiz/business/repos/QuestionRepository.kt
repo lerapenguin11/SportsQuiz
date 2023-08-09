@@ -7,12 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import com.example.sportsquiz.business.models.QuestionModel
 import com.example.sportsquiz.business.models.QuizListModel
 import com.example.sportsquiz.presentation.ResultFragment
+import com.example.sportsquiz.presentation.TestFragment
 import com.example.sportsquiz.utilits.replaceFragment
 import com.google.firebase.firestore.FirebaseFirestore
 
 class QuestionRepository() {
 
     private val collectionRef = FirebaseFirestore.getInstance().collection("Quiz")
+
     @SuppressLint("SuspiciousIndentation")
     fun getQuestionData(id : Int) : LiveData<MutableList<QuestionModel>> {
         val mutableData = MutableLiveData<MutableList<QuestionModel>>()
