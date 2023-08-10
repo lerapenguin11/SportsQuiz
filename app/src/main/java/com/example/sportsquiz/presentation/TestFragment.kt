@@ -21,6 +21,7 @@ class TestFragment : Fragment(){
     private val binding get() = _binding!!
     var checkClick = true
     var check = 1
+    var position = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,26 +30,32 @@ class TestFragment : Fragment(){
 
         _binding = FragmentTestBinding.inflate(inflater, container, false)
 
-        loadQuestions()
+        loadQuestions(position)
 
         return binding.root
     }
 
     @SuppressLint("SuspiciousIndentation")
-    private fun loadQuestions(){
-        val viewModel : QuestionViewModel = ViewModelProvider(requireActivity()).get(
-            QuestionViewModel::class.java)
+    private fun loadQuestions(i : Int){
+        if (position<=8){
+            val viewModel : QuestionViewModel = ViewModelProvider(requireActivity()).get(
+                QuestionViewModel::class.java)
             viewModel.getResulQuestion().observe(viewLifecycleOwner, Observer {questions ->
-                for (doc in questions){
-                    binding.tvQuestionsTest.text = doc.question
-                    binding.tvOptionOne.text = doc.option_a
-                    binding.tvOptionTwo.text = doc.option_b
-                    binding.tvOptionThree.text = doc.answer
-                }
-
+                binding.tvQuestionsTest.text = questions.get(i + 1).question
+                binding.tvOptionOne.text = questions.get(i + 1).option_a
+                binding.tvOptionTwo.text = questions.get(i + 1).option_b
+                binding.tvOptionThree.text = questions.get(i + 1).answer
                 optionsClick()
-                newQuestion()
             })
+            position++
+            newQuestion()
+            println("POSITION: " + position)
+        } else{
+            binding.btNext.setOnClickListener {
+                replaceFragment(ResultFragment())
+            }
+        }
+
     }
 
     private fun newQuestion() {
@@ -58,18 +65,9 @@ class TestFragment : Fragment(){
         //TODO изменить
             binding.btNext.setOnClickListener {
                 updateOptionsClick()
-                viewModel.getResulQuestion().observe(viewLifecycleOwner, Observer {questions ->
-                    for (doc in questions){
-                        binding.tvQuestionsTest.text = doc.question
-                        binding.tvOptionOne.text = doc.option_a
-                        binding.tvOptionTwo.text = doc.option_b
-                        binding.tvOptionThree.text = doc.answer
-                    }
-                    optionsClick()
+                loadQuestions(position)
 
-                    checkClick = true
-                })
-                checkClick = false
+                checkClick = true
             }
     }
 
@@ -87,10 +85,10 @@ class TestFragment : Fragment(){
     private fun optionsClick() {
         val viewModel : AwardsViewModel = ViewModelProvider(requireActivity()).get(
             AwardsViewModel::class.java)
-        if(check == 3) {
-            binding.btNext.setOnClickListener {
+        if(check == 10) {
+            /*binding.btNext.setOnClickListener {
                 replaceFragment(ResultFragment())
-            }
+            }*/ println(check)
         } else{
             binding.constraintLayout9.setOnClickListener {
                 if (checkClick){
