@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
@@ -44,6 +45,7 @@ class FootballFragment : Fragment(), QuizListListener {
         super.onResume()
         observeData()
         onClick()
+        getLives()
     }
 
     private fun onClick() {
@@ -62,9 +64,22 @@ class FootballFragment : Fragment(), QuizListListener {
 
     }
 
+    private fun getLives(){
+        val viewModel : LivesViewModel = ViewModelProvider(requireActivity()).get(
+            LivesViewModel::class.java)
+
+        if (viewModel.getLives() == 0){
+            viewModel.startLifeRestoreTimer(binding.tvLives)
+            Toast.makeText(context, "You don't have enough lives! Wait for the update", Toast.LENGTH_LONG).show()
+        } else{
+            binding.tvLives.text = viewModel.getLives().toString()
+        }
+    }
+
     override fun quizList(list: QuizListModelFootball) {
         val viewModel : LivesViewModel = ViewModelProvider(requireActivity()).get(
             LivesViewModel::class.java)
+        viewModel.useLife()
 
         val dialog = Dialog(requireContext(), android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -97,7 +112,7 @@ class FootballFragment : Fragment(), QuizListListener {
 
         play.setOnClickListener {
             dialog.dismiss()
-            viewModel.useLife()
+            //viewModel.useLife()
             viewModelTest.id = list.id
             replaceFragment(TestFragment())}
     }

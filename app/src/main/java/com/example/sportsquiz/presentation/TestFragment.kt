@@ -13,6 +13,7 @@ import com.example.sportsquiz.R
 import com.example.sportsquiz.databinding.FragmentTestBinding
 import com.example.sportsquiz.utilits.replaceFragment
 import com.example.sportsquiz.viewModel.AwardsViewModel
+import com.example.sportsquiz.viewModel.LivesViewModel
 import com.example.sportsquiz.viewModel.QuestionViewModel
 
 class TestFragment : Fragment(){
@@ -92,6 +93,9 @@ class TestFragment : Fragment(){
     }
 
     private fun optionsClick() {
+        val viewModel : AwardsViewModel = ViewModelProvider(requireActivity()).get(
+            AwardsViewModel::class.java)
+
         binding.constraintLayout9.setOnClickListener {
             if (checkClick){
                 binding.constraintLayout9.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_wrong)
@@ -119,6 +123,7 @@ class TestFragment : Fragment(){
                 binding.tvStatusCorrect.visibility = View.VISIBLE
                 binding.btNext.visibility = View.VISIBLE
                 check++
+                viewModel.counterQuestion = check*10
             }
         }
     }
