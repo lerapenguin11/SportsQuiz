@@ -40,10 +40,16 @@ class AwardsViewModel(application: Application) : AndroidViewModel(application) 
         myCountQuestion = pref.getInt(PREFS_KEY_COUNT, 0)
     }
 
+    private var check = -3
 
+    fun check() : Int{
+        viewModelScope.launch {
+            check++
+        }
+        return check
+    }
 
     companion object {
         private const val PREFS_KEY_COUNT = "COUNT_QUESTION"
-        private const val GET_PREFS_KEY = "KEY"
     }
 }

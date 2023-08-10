@@ -21,7 +21,7 @@ class QuestionRepository() {
         collectionRef.get().addOnSuccessListener { querySnapshot ->
             for (documentSnapshot in querySnapshot.documents) {
                 val documentId = documentSnapshot.id
-
+                    //id сбросить
                 if (3>=id){
                     FirebaseFirestore.getInstance().collection("Quiz").document(documentId)
                         .collection("questions").whereEqualTo("id", id)
@@ -48,8 +48,8 @@ class QuestionRepository() {
                             mutableData.value = listData
                             Log.i("SNAPSHOT_QUESTIONS: ", mutableData.value.toString())
                         }
-                } else {
-                    replaceFragment(ResultFragment())
+                } else{
+
                 }
             }
         }

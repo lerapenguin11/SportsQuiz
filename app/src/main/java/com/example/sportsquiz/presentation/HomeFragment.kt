@@ -15,8 +15,6 @@ import com.example.sportsquiz.viewModel.LivesViewModel
 import java.util.*
 
 class HomeFragment : Fragment() {
-    private lateinit var countDownTimer : CountDownTimer
-    private var timeLeftInMillis = LIFE_RESTORE_TIME
 
     private var _binding : FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -49,6 +47,5 @@ class HomeFragment : Fragment() {
                 replaceFragment(FootballFragment())
             }
         }
-
     }
 }

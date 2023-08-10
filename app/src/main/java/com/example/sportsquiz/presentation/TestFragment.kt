@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportsquiz.R
 import com.example.sportsquiz.databinding.FragmentTestBinding
+import com.example.sportsquiz.utilits.replaceFragment
 import com.example.sportsquiz.viewModel.AwardsViewModel
 import com.example.sportsquiz.viewModel.QuestionViewModel
 
@@ -18,7 +19,8 @@ class TestFragment : Fragment(){
 
     private var _binding : FragmentTestBinding? = null
     private val binding get() = _binding!!
-    var check = true
+    var checkClick = true
+    var check = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,19 +56,21 @@ class TestFragment : Fragment(){
         val viewModel : QuestionViewModel = ViewModelProvider(requireActivity()).get(
             QuestionViewModel::class.java)
         //TODO изменить
-        binding.btNext.setOnClickListener {
-            updateOptionsClick()
-            viewModel.getResulQuestion().observe(viewLifecycleOwner, Observer {questions ->
-                for (doc in questions){
-                    binding.tvQuestionsTest.text = doc.question
-                    binding.tvOptionOne.text = doc.option_a
-                    binding.tvOptionTwo.text = doc.option_b
-                    binding.tvOptionThree.text = doc.answer
-                }
-                check = true
-                optionsClick()
-            })
-        }
+            binding.btNext.setOnClickListener {
+                updateOptionsClick()
+                viewModel.getResulQuestion().observe(viewLifecycleOwner, Observer {questions ->
+                    for (doc in questions){
+                        binding.tvQuestionsTest.text = doc.question
+                        binding.tvOptionOne.text = doc.option_a
+                        binding.tvOptionTwo.text = doc.option_b
+                        binding.tvOptionThree.text = doc.answer
+                    }
+                    optionsClick()
+
+                    checkClick = true
+                })
+                checkClick = false
+            }
     }
 
     private fun updateOptionsClick() {
@@ -83,36 +87,43 @@ class TestFragment : Fragment(){
     private fun optionsClick() {
         val viewModel : AwardsViewModel = ViewModelProvider(requireActivity()).get(
             AwardsViewModel::class.java)
-
-        binding.constraintLayout9.setOnClickListener {
-            if (check){
-                binding.constraintLayout9.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_wrong)
-                check = false
-                binding.ivStatusWrong.visibility = View.VISIBLE
-                binding.tvStatusWrong.visibility = View.VISIBLE
-                binding.btNext.visibility = View.VISIBLE
+        if(check == 3) {
+            binding.btNext.setOnClickListener {
+                replaceFragment(ResultFragment())
             }
-        }
-        binding.constraintLayout10.setOnClickListener {
-            if (check){
-                binding.constraintLayout10.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_wrong)
-                check = false
-                binding.ivStatusWrong.visibility = View.VISIBLE
-                binding.tvStatusWrong.visibility = View.VISIBLE
-                binding.btNext.visibility = View.VISIBLE
+        } else{
+            binding.constraintLayout9.setOnClickListener {
+                if (checkClick){
+                    binding.constraintLayout9.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_wrong)
+                    checkClick = false
+                    binding.ivStatusWrong.visibility = View.VISIBLE
+                    binding.tvStatusWrong.visibility = View.VISIBLE
+                    binding.btNext.visibility = View.VISIBLE
+                    check++
+                }
             }
-        }
-        binding.constraintLayout11.setOnClickListener {
-            if (check){
-                binding.constraintLayout11.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_win)
-                check = false
-                binding.ivStatusCorrect.visibility = View.VISIBLE
-                binding.tvStatusCorrect.visibility = View.VISIBLE
-                binding.btNext.visibility = View.VISIBLE
-
-                viewModel.collectQuestion()
+            binding.constraintLayout10.setOnClickListener {
+                if (checkClick){
+                    binding.constraintLayout10.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_wrong)
+                    checkClick = false
+                    binding.ivStatusWrong.visibility = View.VISIBLE
+                    binding.tvStatusWrong.visibility = View.VISIBLE
+                    binding.btNext.visibility = View.VISIBLE
+                    check++
+                }
             }
+            binding.constraintLayout11.setOnClickListener {
+                if (checkClick){
+                    binding.constraintLayout11.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_win)
+                    checkClick = false
+                    binding.ivStatusCorrect.visibility = View.VISIBLE
+                    binding.tvStatusCorrect.visibility = View.VISIBLE
+                    binding.btNext.visibility = View.VISIBLE
+                    check++
 
+                    viewModel.collectQuestion()
+                }
+            }
         }
 
 

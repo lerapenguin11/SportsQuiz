@@ -30,7 +30,7 @@ class ResultFragment : Fragment() {
             binding.blockWrong.visibility = View.VISIBLE
         }
         viewModel.counterQuestionLiveData.observe(viewLifecycleOwner) {
-            binding.tvAnswerCount.text = "$it/10"
+            binding.tvAnswerCount.text = "$it/3"
         }
 
         binding.btClose.setOnClickListener {
