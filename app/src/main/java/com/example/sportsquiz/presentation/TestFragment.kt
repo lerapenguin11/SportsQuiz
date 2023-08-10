@@ -20,8 +20,9 @@ class TestFragment : Fragment(){
     private var _binding : FragmentTestBinding? = null
     private val binding get() = _binding!!
     var checkClick = true
-    var check = 1
-    var position = -1
+    var check = 0
+    var position = 0
+    var positionItem = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,43 +31,51 @@ class TestFragment : Fragment(){
 
         _binding = FragmentTestBinding.inflate(inflater, container, false)
 
-        loadQuestions(position)
+        loadQuestions(positionItem)
 
         return binding.root
     }
 
     @SuppressLint("SuspiciousIndentation")
     private fun loadQuestions(i : Int){
-        if (position<=8){
-            val viewModel : QuestionViewModel = ViewModelProvider(requireActivity()).get(
-                QuestionViewModel::class.java)
-            viewModel.getResulQuestion().observe(viewLifecycleOwner, Observer {questions ->
-                binding.tvQuestionsTest.text = questions.get(i + 1).question
-                binding.tvOptionOne.text = questions.get(i + 1).option_a
-                binding.tvOptionTwo.text = questions.get(i + 1).option_b
-                binding.tvOptionThree.text = questions.get(i + 1).answer
-                optionsClick()
-            })
-            position++
-            newQuestion()
-            println("POSITION: " + position)
-        } else{
-            binding.btNext.setOnClickListener {
-                replaceFragment(ResultFragment())
-            }
-        }
-
-    }
-
-    private fun newQuestion() {
+        positionItem++
+        println(positionItem)
 
         val viewModel : QuestionViewModel = ViewModelProvider(requireActivity()).get(
             QuestionViewModel::class.java)
-        //TODO изменить
+        viewModel.getResulQuestion().observe(viewLifecycleOwner, Observer {questions ->
+            binding.tvQuestionsTest.text = questions.get(i).question
+            binding.tvOptionOne.text = questions.get(i).option_a
+            binding.tvOptionTwo.text = questions.get(i).option_b
+            binding.tvOptionThree.text = questions.get(i).answer
+            optionsClick()
+            newQuestion()
+
+            position++
+        })
+
+        if (position==10){
+
+            binding.btNext.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putInt("result", check)
+
+                val transaction = activity?.supportFragmentManager?.beginTransaction()
+                val fragment = ResultFragment()
+                fragment.arguments = bundle
+                transaction?.replace(R.id.main_layout, fragment)
+                transaction?.commit()
+                if (check.toString().isEmpty()){
+                    replaceFragment(ResultFragment())
+                }
+            }
+        }
+    }
+
+    private fun newQuestion() {
             binding.btNext.setOnClickListener {
                 updateOptionsClick()
-                loadQuestions(position)
-
+                loadQuestions(positionItem)
                 checkClick = true
             }
     }
@@ -83,47 +92,34 @@ class TestFragment : Fragment(){
     }
 
     private fun optionsClick() {
-        val viewModel : AwardsViewModel = ViewModelProvider(requireActivity()).get(
-            AwardsViewModel::class.java)
-        if(check == 10) {
-            /*binding.btNext.setOnClickListener {
-                replaceFragment(ResultFragment())
-            }*/ println(check)
-        } else{
-            binding.constraintLayout9.setOnClickListener {
-                if (checkClick){
-                    binding.constraintLayout9.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_wrong)
-                    checkClick = false
-                    binding.ivStatusWrong.visibility = View.VISIBLE
-                    binding.tvStatusWrong.visibility = View.VISIBLE
-                    binding.btNext.visibility = View.VISIBLE
-                    check++
-                }
-            }
-            binding.constraintLayout10.setOnClickListener {
-                if (checkClick){
-                    binding.constraintLayout10.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_wrong)
-                    checkClick = false
-                    binding.ivStatusWrong.visibility = View.VISIBLE
-                    binding.tvStatusWrong.visibility = View.VISIBLE
-                    binding.btNext.visibility = View.VISIBLE
-                    check++
-                }
-            }
-            binding.constraintLayout11.setOnClickListener {
-                if (checkClick){
-                    binding.constraintLayout11.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_win)
-                    checkClick = false
-                    binding.ivStatusCorrect.visibility = View.VISIBLE
-                    binding.tvStatusCorrect.visibility = View.VISIBLE
-                    binding.btNext.visibility = View.VISIBLE
-                    check++
+        binding.constraintLayout9.setOnClickListener {
+            if (checkClick){
+                binding.constraintLayout9.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_wrong)
+                checkClick = false
+                binding.ivStatusWrong.visibility = View.VISIBLE
+                binding.tvStatusWrong.visibility = View.VISIBLE
+                binding.btNext.visibility = View.VISIBLE
 
-                    viewModel.collectQuestion()
-                }
             }
         }
-
-
+        binding.constraintLayout10.setOnClickListener {
+            if (checkClick){
+                binding.constraintLayout10.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_wrong)
+                checkClick = false
+                binding.ivStatusWrong.visibility = View.VISIBLE
+                binding.tvStatusWrong.visibility = View.VISIBLE
+                binding.btNext.visibility = View.VISIBLE
+            }
+        }
+        binding.constraintLayout11.setOnClickListener {
+            if (checkClick){
+                binding.constraintLayout11.background = ContextCompat.getDrawable(requireContext(), R.drawable.bg_option_win)
+                checkClick = false
+                binding.ivStatusCorrect.visibility = View.VISIBLE
+                binding.tvStatusCorrect.visibility = View.VISIBLE
+                binding.btNext.visibility = View.VISIBLE
+                check++
+            }
+        }
     }
 }

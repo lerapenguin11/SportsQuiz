@@ -88,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="512"
+                    tools:text="512"
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:textSize="35sp" />
