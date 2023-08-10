@@ -14,19 +14,12 @@ class QuestionViewModel : ViewModel() {
 
     fun getResulQuestion() : LiveData<MutableList<QuestionModel>> {
         val mutableData = MutableLiveData<MutableList<QuestionModel>>()
-        repository.getQuestionData(updateId()).observeForever { list ->
+        repository.getQuestionData(id = id).observeForever { list ->
             mutableData.value = list
         }
 
         return mutableData
     }
 
-    private var id = 0
-
-    fun updateId() : Int{
-        viewModelScope.launch {
-            id++
-        }
-        return id
-    }
+    var id : Int = 0
 }

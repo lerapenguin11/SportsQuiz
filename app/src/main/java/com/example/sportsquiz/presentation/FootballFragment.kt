@@ -6,16 +6,18 @@ import android.view.*
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsquiz.R
-import com.example.sportsquiz.business.models.QuizListModel
+import com.example.sportsquiz.business.models.QuizListModelFootball
 import com.example.sportsquiz.databinding.FragmentFootballBinding
 import com.example.sportsquiz.presentation.adapter.QuizListAdapter
 import com.example.sportsquiz.presentation.adapter.listener.QuizListListener
 import com.example.sportsquiz.utilits.replaceFragment
 import com.example.sportsquiz.viewModel.LivesViewModel
+import com.example.sportsquiz.viewModel.QuestionViewModel
 import com.example.sportsquiz.viewModel.QuizListViewModel
 
 class FootballFragment : Fragment(), QuizListListener {
@@ -60,7 +62,7 @@ class FootballFragment : Fragment(), QuizListListener {
 
     }
 
-    override fun quizList(list: QuizListModel) {
+    override fun quizList(list: QuizListModelFootball) {
         val viewModel : LivesViewModel = ViewModelProvider(requireActivity()).get(
             LivesViewModel::class.java)
 
@@ -90,9 +92,13 @@ class FootballFragment : Fragment(), QuizListListener {
 
         close.setOnClickListener { dialog.cancel() }
 
+        val viewModelTest : QuestionViewModel = ViewModelProvider(requireActivity()).get(
+            QuestionViewModel::class.java)
+
         play.setOnClickListener {
             dialog.dismiss()
             viewModel.useLife()
+            viewModelTest.id = list.id
             replaceFragment(TestFragment())}
     }
 }

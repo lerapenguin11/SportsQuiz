@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sportsquiz.R
-import com.example.sportsquiz.business.models.QuizListModel
+import com.example.sportsquiz.business.models.QuizListModelFootball
 import com.example.sportsquiz.presentation.adapter.listener.QuizListListener
 
 class QuizListAdapter(val quizListListener: QuizListListener) : RecyclerView.Adapter<QuizListAdapter.QuizListViewHolder>(){
 
-    private val quizList = mutableListOf<QuizListModel>()
+    private val quizList = mutableListOf<QuizListModelFootball>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_test, parent, false)
@@ -23,7 +23,7 @@ class QuizListAdapter(val quizListListener: QuizListListener) : RecyclerView.Ada
     override fun getItemCount(): Int = quizList.size
 
     override fun onBindViewHolder(holder: QuizListViewHolder, position: Int) {
-        val resultQuizList : QuizListModel = quizList[position]
+        val resultQuizList : QuizListModelFootball = quizList[position]
 
         holder.title.text = resultQuizList.title
 
@@ -33,7 +33,7 @@ class QuizListAdapter(val quizListListener: QuizListListener) : RecyclerView.Ada
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItem(resultQuizList : List<QuizListModel>){
+    fun setItem(resultQuizList : List<QuizListModelFootball>){
         this.quizList.clear()
         this.quizList.addAll(resultQuizList)
         notifyDataSetChanged()

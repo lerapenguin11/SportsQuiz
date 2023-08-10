@@ -1,8 +1,8 @@
 package com.example.sportsquiz.presentation.adapter.listener
 
-import com.example.sportsquiz.business.models.QuizListModel
+import com.example.sportsquiz.business.models.QuizListModelFootball
 
 interface QuizListListener {
 
-    fun quizList(list : QuizListModel)
+    fun quizList(list : QuizListModelFootball)
 }
