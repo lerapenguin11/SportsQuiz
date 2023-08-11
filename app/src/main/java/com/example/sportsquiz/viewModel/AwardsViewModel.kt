@@ -19,32 +19,26 @@ class AwardsViewModel(application: Application) : AndroidViewModel(application) 
 
     val myCountQuestionLiveData = MutableLiveData(myCountQuestion)
 
-    var counterQuestion = pref.getInt(PREFS_KEY_COUNT, 0)
+
+    var counterQuestion = 0
         set(value) {
             field = value
-
             counterQuestionLiveData.value = value
         }
     val counterQuestionLiveData = MutableLiveData(counterQuestion)
 
-    /*fun collectQuestion(){
+    fun collectCoins() {
         viewModelScope.launch {
             counterQuestion++
         }
 
     }
 
-    private fun getTest() : Int{
-        viewModelScope.launch {
-            counterQuestion*10
-        }
-        return counterQuestion
-    }*/
-
     fun saveToPrefs() {
         pref.edit()
-            .putInt(PREFS_KEY_COUNT, counterQuestion)
+            .putInt(PREFS_KEY_COUNT, counterQuestion*10 + myCountQuestion)
             .apply()
+        //counterQuestion = 0
     }
 
     companion object {

@@ -29,4 +29,10 @@
     <string name="defeat">Defeat!</string>
     <string name="you_haven_t_answered_all_the_questions_try_taking_the_test_again">You haven\'t answered all the questions. Try taking the test again.</string>
     <string name="finish_bt">Finish</string>
+    <string name="quiz_nsport">Sport Quiz</string>
+    <string name="enter_a_name">Enter name</string>
+    <string name="enter_your_last_name">Enter your last name</string>
+    <string name="welcome">Welcome!</string>
+    <string name="text_onbording_second">The application has four blocks with tests: football, basketball, hockey and boxing. Now you have access to the block for passing the tests Football, when you earn 1000 points, then you will open the block Hockey and so on.</string>
+    <string name="text_onboarding_third">The application gives three lives to pass the tests. Once they run out, you need to wait an hour for them to update.</string>
 </resources>

@@ -28,20 +28,11 @@ class HomeFragment : Fragment() {
         val viewModel : AwardsViewModel = ViewModelProvider(requireActivity()).get(
             AwardsViewModel::class.java)
 
-        if(viewModel.counterQuestionLiveData.value!! < 1){
-            binding.tvPoints.text = "0"
-        } else{
-            viewModel.counterQuestionLiveData.observe(viewLifecycleOwner){
-                val pointStr = it
-                binding.tvPoints.text = pointStr.toString()
-                viewModel.saveToPrefs()
-            }
-        }
+        binding.tvPoints.text = viewModel.myCountQuestion.toString()
 
         binding.boxHockey.setOnClickListener {
             if (viewModel.counterQuestionLiveData.value!! >= 1000){
                 viewModel.counterQuestion = 0
-                viewModel.saveToPrefs()
                 binding.tvPoints.text = "0"
             } else{
                 Toast.makeText(context, "You don't have enough points!", Toast.LENGTH_LONG).show()

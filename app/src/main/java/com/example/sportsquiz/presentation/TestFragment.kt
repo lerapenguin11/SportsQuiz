@@ -39,6 +39,7 @@ class TestFragment : Fragment(){
 
     @SuppressLint("SuspiciousIndentation")
     private fun loadQuestions(i : Int){
+
         positionItem++
         println(positionItem)
 
@@ -123,7 +124,8 @@ class TestFragment : Fragment(){
                 binding.tvStatusCorrect.visibility = View.VISIBLE
                 binding.btNext.visibility = View.VISIBLE
                 check++
-                viewModel.counterQuestion = check*10
+                viewModel.collectCoins()
+                viewModel.saveToPrefs()
             }
         }
     }
