@@ -23,13 +23,14 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Sport\nQuizs"
+            android:text="@string/sport_nquizs"
             android:justificationMode="inter_word"
             android:textColor="@color/white"
             android:textSize="50sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UnusedAttribute" />
 
 
         <LinearLayout
@@ -116,7 +117,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="0"
+                    tools:text="0"
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:textSize="35sp" />

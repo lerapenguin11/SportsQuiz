@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:padding="30dp"
-    tools:context=".presentation.onBoarding.ThirstFragment">
+    tools:context=".presentation.onBoarding.ThirstFragmentOB">
 
 
     <TextView
@@ -37,7 +37,7 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="In the Sports Quizzes app, you can take tests in different sports."
+        android:text="@string/in_the_sports_quizzes_app_you_can_take_tests_in_different_sports"
         android:layout_marginTop="15dp"
         android:textColor="@color/white"
         android:textSize="18sp"

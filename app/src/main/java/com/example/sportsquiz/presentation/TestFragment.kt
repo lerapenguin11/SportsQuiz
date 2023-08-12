@@ -41,7 +41,6 @@ class TestFragment : Fragment(){
     private fun loadQuestions(i : Int){
 
         positionItem++
-        println(positionItem)
 
         val viewModel : QuestionViewModel = ViewModelProvider(requireActivity()).get(
             QuestionViewModel::class.java)
@@ -61,7 +60,6 @@ class TestFragment : Fragment(){
             binding.btNext.setOnClickListener {
                 val bundle = Bundle()
                 bundle.putInt("result", check)
-
                 val transaction = activity?.supportFragmentManager?.beginTransaction()
                 val fragment = ResultFragment()
                 fragment.arguments = bundle
@@ -125,7 +123,6 @@ class TestFragment : Fragment(){
                 binding.btNext.visibility = View.VISIBLE
                 check++
                 viewModel.collectCoins()
-                viewModel.saveToPrefs()
             }
         }
     }

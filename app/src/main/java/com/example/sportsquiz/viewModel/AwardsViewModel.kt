@@ -11,6 +11,18 @@ class AwardsViewModel(application: Application) : AndroidViewModel(application) 
 
     val pref = application.getSharedPreferences(PREFS_KEY_COUNT, MODE_PRIVATE)
 
+    fun getPoints() : Int{
+        return pref.getInt(PREFS_KEY_COUNT, 0)
+    }
+
+    fun usePoint() {
+        val points = getPoints()
+        if (points >= 0) {
+            pref.edit().putInt(PREFS_KEY_COUNT, points + counterQuestion*10).apply()
+            counterQuestion = 0
+        }
+    }
+
     var myCountQuestion = pref.getInt(PREFS_KEY_COUNT, 0)
         set(value) {
             field = value
@@ -31,14 +43,6 @@ class AwardsViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch {
             counterQuestion++
         }
-
-    }
-
-    fun saveToPrefs() {
-        pref.edit()
-            .putInt(PREFS_KEY_COUNT, counterQuestion*10 + myCountQuestion)
-            .apply()
-        //counterQuestion = 0
     }
 
     companion object {

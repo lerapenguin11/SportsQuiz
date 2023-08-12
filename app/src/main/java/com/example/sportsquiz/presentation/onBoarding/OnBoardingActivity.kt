@@ -24,21 +24,24 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_on_boarding)
         setStatusBarGradiant(this)
+        setViewPager()
+    }
 
+    private fun setViewPager() {
         val fragmentList = arrayListOf<Fragment>(
-            ThirstFragment(),
-            SecondFragment(),
-            ThirdFragment()
+            ThirstFragmentOB(),
+            SecondFragmentOB(),
+            ThirdFragmentOB()
         )
 
-        val adapter = OnBoardingAdapter(
+        val adapterViewPager = OnBoardingAdapter(
             fragmentList,
             this.supportFragmentManager,
             lifecycle
         )
 
         val viewPager : ViewPager2 = findViewById(R.id.view_pager)
-        viewPager.adapter = adapter
+        viewPager.adapter = adapterViewPager
 
         val indicator : DotsIndicator = findViewById(R.id.dots_indicator)
         indicator.attachTo(viewPager)

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="30dp"
     android:background="@color/background"
-    tools:context=".presentation.onBoarding.SecondFragment">
+    tools:context=".presentation.onBoarding.SecondFragmentOB">
 
 
     <ImageView

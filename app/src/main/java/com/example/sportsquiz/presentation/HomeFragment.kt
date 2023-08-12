@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.example.sportsquiz.R
 import com.example.sportsquiz.databinding.FragmentHomeBinding
-import com.example.sportsquiz.utilits.LIFE_RESTORE_TIME
 import com.example.sportsquiz.utilits.replaceFragment
 import com.example.sportsquiz.viewModel.AwardsViewModel
 import com.example.sportsquiz.viewModel.LivesViewModel
@@ -25,27 +25,31 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        val viewModel : AwardsViewModel = ViewModelProvider(requireActivity()).get(
-            AwardsViewModel::class.java)
-
-        binding.tvPoints.text = viewModel.myCountQuestion.toString()
-
-        binding.boxHockey.setOnClickListener {
-            if (viewModel.counterQuestionLiveData.value!! >= 1000){
-                viewModel.counterQuestion = 0
-                binding.tvPoints.text = "0"
-            } else{
-                Toast.makeText(context, "You don't have enough points!", Toast.LENGTH_LONG).show()
-            }
-        }
-
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
         lives()
+        points()
     }
+
+    private fun points() {
+        val viewModel : AwardsViewModel = ViewModelProvider(requireActivity()).get(
+            AwardsViewModel::class.java)
+
+        viewModel.usePoint()
+        binding.tvPoints.text = viewModel.getPoints().toString()
+        binding.boxHockey.setOnClickListener {
+            if (viewModel.counterQuestionLiveData.value!! >= 1000){
+                viewModel.counterQuestion = 0
+                binding.tvPoints.text = "0"
+            } else{
+                Toast.makeText(context, R.string.point_no, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
 
     private fun lives() {
         val viewModel : LivesViewModel = ViewModelProvider(requireActivity()).get(
@@ -54,12 +58,13 @@ class HomeFragment : Fragment() {
         if (viewModel.getLives() == 0){
             viewModel.startLifeRestoreTimer(binding.tvLives)
             binding.clFootball.setOnClickListener {
-                Toast.makeText(context, "You don't have enough lives! Wait for the update", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.lives_no, Toast.LENGTH_LONG).show()
             }
         } else{
             binding.tvLives.text = viewModel.getLives().toString()
             binding.clFootball.setOnClickListener {
                 replaceFragment(FootballFragment())
+                onPause()
             }
         }
     }

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">SportsQuiz</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -35,4 +35,12 @@
     <string name="welcome">Welcome!</string>
     <string name="text_onbording_second">The application has four blocks with tests: football, basketball, hockey and boxing. Now you have access to the block for passing the tests Football, when you earn 1000 points, then you will open the block Hockey and so on.</string>
     <string name="text_onboarding_third">The application gives three lives to pass the tests. Once they run out, you need to wait an hour for them to update.</string>
+    <string name="_7_aug_2023">7 aug 2023</string>
+    <string name="tests">Tests</string>
+    <string name="lives_">Lives</string>
+    <string name="_0">0</string>
+    <string name="sport_nquizs">Sport\nQuizs</string>
+    <string name="in_the_sports_quizzes_app_you_can_take_tests_in_different_sports">In the Sports Quizzes app, you can take tests in different sports.</string>
+    <string name="point_no" tools:ignore="StringEscaping">You don\'t have enough points!</string>
+    <string name="lives_no" tools:ignore="StringEscaping">You don\'t have enough lives! Wait for the update</string>
 </resources>
