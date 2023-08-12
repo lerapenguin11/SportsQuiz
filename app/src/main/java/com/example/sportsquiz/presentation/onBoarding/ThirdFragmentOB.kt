@@ -5,17 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.sportsquiz.R
+import com.example.sportsquiz.databinding.FragmentThirdBinding
 
 class ThirdFragmentOB : Fragment() {
-
+    private var _binding : FragmentThirdBinding? = null
+    private val binding get() = _binding!!
     //Второй фрагмент onBoarding Sport Quiz
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_third, container, false)
+        _binding = FragmentThirdBinding.inflate(inflater, container, false)
+
+        binding.imageView9.visibility = View.VISIBLE
+        binding.textView14.visibility = View.VISIBLE
+
+        return binding.root
     }
 }
